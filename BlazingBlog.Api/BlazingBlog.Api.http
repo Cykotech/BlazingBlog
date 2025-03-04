@@ -1,0 +1,6 @@
+@BlazingBlog.Api_HostAddress = http://localhost:5228
+
+GET {{BlazingBlog.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

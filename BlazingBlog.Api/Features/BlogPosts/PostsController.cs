@@ -7,7 +7,7 @@ namespace BlazingBlog.Api.Features.BlogPosts;
 [ApiController]
 public class PostsController : ControllerBase
 {
-    private PostsService _service;
+    private readonly PostsService _service;
 
     public PostsController(PostsService service)
     {

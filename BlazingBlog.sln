@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingBlog.Client", "Blazi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingBlog.Api", "BlazingBlog.Api\BlazingBlog.Api.csproj", "{8AC7079D-F1A5-46B0-8A90-1724F888D478}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingBlog.ApiTests", "BlazingBlog.ApiTests\BlazingBlog.ApiTests.csproj", "{AD68D3C3-80A2-4530-A4D3-8F2EA38A7ADE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{8AC7079D-F1A5-46B0-8A90-1724F888D478}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AC7079D-F1A5-46B0-8A90-1724F888D478}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AC7079D-F1A5-46B0-8A90-1724F888D478}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD68D3C3-80A2-4530-A4D3-8F2EA38A7ADE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD68D3C3-80A2-4530-A4D3-8F2EA38A7ADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD68D3C3-80A2-4530-A4D3-8F2EA38A7ADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD68D3C3-80A2-4530-A4D3-8F2EA38A7ADE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

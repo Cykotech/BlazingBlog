@@ -1,3 +1,7 @@
+using BlazingBlog.Api.Data;
+using BlazingBlog.Api.Features.BlogPosts;
+using Microsoft.EntityFrameworkCore;
+
 namespace BlazingBlog.Api;
 
 public class Program
@@ -11,6 +15,8 @@ public class Program
         builder.Services.AddControllers();
         builder.Services.AddAuthorization();
         builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(connectionString));
+
+        builder.Services.AddScoped<PostsService>();
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();

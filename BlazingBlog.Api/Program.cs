@@ -8,6 +8,7 @@ public class Program
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
         // Add services to the container.
+        builder.Services.AddControllers();
         builder.Services.AddAuthorization();
         builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(connectionString));
 
@@ -27,6 +28,8 @@ public class Program
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
+
+        app.MapControllers();
 
         app.Run();
     }

@@ -1,3 +1,4 @@
+using BlazingBlog.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlazingBlog.Api.Features.BlogPosts;
@@ -36,22 +37,25 @@ public class PostsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreatePost([FromBody] string title, [FromBody] string content)
+    public async Task<IActionResult> CreatePost([FromBody] BlogPost newPost)
     {
-        var newPost = await _service.CreateNewPost(title, content);
+        var newPostResponse = await _service.CreateNewPost(newPost.Title, newPost.Content);
         
-        if (newPost is null)
+        if (newPostResponse is null)
             return BadRequest();
         
-        return CreatedAtAction(nameof(GetPostById), new { id = newPost.Id }, newPost);
+        return CreatedAtAction(nameof(GetPostById), new { id = newPostResponse.Id }, newPostResponse);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdatePost([FromRoute] int id, [FromBody] string title, [FromBody] string content)
+    public async Task<IActionResult> UpdatePost([FromRoute] int id, [FromBody] BlogPost updatedPost)
     {
-        var updatedPost = await _service.UpdatePost(id, title, content);
+        var updatedPostResponse = await _service.UpdatePost(id, updatedPost.Title, updatedPost.Content);
         
-        return Ok(updatedPost);
+        if (updatedPostResponse is null)
+            return BadRequest();
+        
+        return Ok(updatedPostResponse);
     }
 
     [HttpDelete("{id}")]

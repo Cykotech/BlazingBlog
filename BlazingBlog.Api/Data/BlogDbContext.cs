@@ -1,5 +1,5 @@
-using BlazingBlog.Api.Models;
 using Microsoft.EntityFrameworkCore;
+using BlazingBlog.Api.Features.BlogPosts;
 
 namespace BlazingBlog.Api.Data;
 

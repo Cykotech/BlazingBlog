@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace BlazingBlog.Api.Models;
+namespace BlazingBlog.Api.Features.BlogPosts;
 
 // Database Entity
 public class BlogPost

@@ -1,6 +1,4 @@
-using BlazingBlog.Api.Models;
-
-namespace BlazingBlog.Api.Interfaces;
+namespace BlazingBlog.Api.Features.BlogPosts;
 
 public interface IPostService
 {

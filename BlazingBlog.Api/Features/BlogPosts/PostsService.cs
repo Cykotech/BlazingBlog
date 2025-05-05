@@ -1,29 +1,26 @@
-using BlazingBlog.Api.Data;
 using BlazingBlog.Api.Features.BlogPosts.Exceptions;
-using Microsoft.EntityFrameworkCore;
 
 namespace BlazingBlog.Api.Features.BlogPosts;
 
 public class PostsService : IPostService
 {
-    private readonly BlogDbContext _context;
+    private readonly IPostRepository _repository;
 
-    public PostsService(BlogDbContext context)
+    public PostsService(IPostRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     public async Task<List<BlogPost>> GetAllPosts()
     {
-        return await _context.BlogPosts.ToListAsync();
+        return await _repository.GetAllPosts();
     }
 
     public async Task<BlogPost> GetPostById(int id)
     {
         try
         {
-            var blogPost = await _context.BlogPosts.FirstOrDefaultAsync(p => p.Id == id);
-            return blogPost;
+            return await _repository.GetPostById(id);
         }
         catch (Exception ex)
         {
@@ -36,9 +33,7 @@ public class PostsService : IPostService
         try
         {
             var newPost = new BlogPost(title, content);
-
-            _context.BlogPosts.Add(newPost);
-            await _context.SaveChangesAsync();
+            await _repository.CreatePost(newPost);
             return newPost;
         }
         catch (Exception ex)
@@ -53,23 +48,19 @@ public class PostsService : IPostService
 
         try
         {
-            blogPostToUpdate = _context.BlogPosts.FirstOrDefault(p => p.Id == id);
-        }
-        catch (Exception ex)
-        {
-            throw new PostNotFoundException($"Post with an id of {id} was not found", ex);
-        }
+            blogPostToUpdate = await _repository.GetPostById(id);
 
-        try
-        {
             blogPostToUpdate.Title = title;
             blogPostToUpdate.Content = content;
             blogPostToUpdate.ModifiedAt.Add(DateTime.UtcNow);
 
-            _context.BlogPosts.Update(blogPostToUpdate);
-            await _context.SaveChangesAsync();
+            await _repository.UpdatePost(blogPostToUpdate);
         }
-        catch (Exception ex)
+        catch (PostNotFoundException ex)
+        {
+            throw new PostNotFoundException($"Post with an id of {id} was not found", ex);
+        }
+        catch (PostNotUpdatedException ex)
         {
             throw new PostNotUpdatedException($"Post with an id of {id} was not updated", ex);
         }
@@ -80,13 +71,25 @@ public class PostsService : IPostService
 
     public async Task<bool> DeletePost(int id)
     {
-        var blogPost = _context.BlogPosts.FirstOrDefault(p => p.Id == id);
+        BlogPost blogPostToDelete;
+        try
+        {
+            blogPostToDelete = await _repository.GetPostById(id);
+        }
+        catch (Exception ex)
+        {
+            throw new PostNotFoundException($"Post with an id of {id} was not found", ex);
+        }
 
-        if (blogPost is null)
-            return false;
-
-        blogPost.DeletedAt = DateTime.UtcNow;
-        await _context.SaveChangesAsync();
+        try
+        {
+            blogPostToDelete.DeletedAt = DateTime.UtcNow;
+            await _repository.UpdatePost(blogPostToDelete);
+        }
+        catch (Exception ex)
+        {
+            throw new PostNotUpdatedException($"Post with an id of {id} was not deleted", ex);
+        }
 
         return true;
     }

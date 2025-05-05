@@ -16,7 +16,8 @@ public class Program
         builder.Services.AddAuthorization();
         builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(connectionString));
 
-        builder.Services.AddScoped<PostsService>();
+        builder.Services.AddScoped<IPostRepository, PostsRepository>();
+        builder.Services.AddScoped<IPostService, PostsService>();
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();

@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingBlog.Client", "Blazi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingBlog.Api", "BlazingBlog.Api\BlazingBlog.Api.csproj", "{8AC7079D-F1A5-46B0-8A90-1724F888D478}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingBlog.ApiTests", "BlazingBlog.ApiTests\BlazingBlog.ApiTests.csproj", "{AD68D3C3-80A2-4530-A4D3-8F2EA38A7ADE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingBlog.Tests", "BlazingBlog.Tests\BlazingBlog.Tests.csproj", "{AD68D3C3-80A2-4530-A4D3-8F2EA38A7ADE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

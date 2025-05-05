@@ -3,7 +3,7 @@ using BlazingBlog.Api.Features.BlogPosts.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
-namespace BlazingBlog.ApiTests;
+namespace BlazingBlog.Tests;
 
 public class ControllerTests
 {
@@ -20,10 +20,12 @@ public class ControllerTests
     [Test]
     public async Task Get_All_Posts_Returns_200_When_Posts_Exist()
     {
-        var expectedBlogPosts = new List<BlogPost>();
-        expectedBlogPosts.Add(new(title: "Test", content: "Test"));
-        expectedBlogPosts.Add(new(title: "Test2", content: "Test2"));
-        expectedBlogPosts.Add(new(title: "Test3", content: "Test3"));
+        var expectedBlogPosts = new List<BlogPost>
+        {
+            new(title: "Test", content: "Test"),
+            new(title: "Test2", content: "Test2"),
+            new(title: "Test3", content: "Test3")
+        };
         _mockPostsService.Setup(s => s.GetAllPosts().Result).Returns(expectedBlogPosts);
 
         var result = await _postsController.GetAllPosts() as OkObjectResult;
